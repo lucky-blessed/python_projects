@@ -5,6 +5,11 @@ A simple command line application to manage tasks.
 """
 
 import sys
+import json
+import os
+from datetime import datetime
+
+TASKS_FILE = "tasks.json"
 
 def main():
     """
@@ -25,7 +30,7 @@ def main():
     
     command = args[1]
     print(f"Command recieved: {command}")
-    
+
 
 if __name__ == "__main__":
     main()
