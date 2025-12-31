@@ -43,6 +43,20 @@ def save_tasks(tasks):
         json.dump(tasks, file, indent=2)
 
 
+def generate_task_id(tasks):
+    """
+    Generates a unique task ID.
+    Use the highest existing ID + 1.
+    """
+
+    if not tasks:
+        return 1
+    
+    # Get the highest ID currently in the list
+    max_id = max(task["id"] for task in tasks)
+    return max_id + 1
+
+
 
 def main():
     """
