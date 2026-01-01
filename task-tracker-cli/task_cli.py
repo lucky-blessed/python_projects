@@ -57,6 +57,30 @@ def generate_task_id(tasks):
     return max_id + 1
 
 
+def add_task(description):
+    """
+    Adds a new task with a unique ID and timestamps:
+    """
+
+    tasks = load_tasks()
+
+    task_id = generate_task_id(tasks)
+    time_now = datetime.now().isoformat()
+
+    new_task = {
+        "id": task_id,
+        "description": description,
+        "status": "todo",
+        "createdAt": time_now,
+        "updatedAt": time_now
+    }
+
+    tasks.append(new_task)
+    save_tasks(tasks)
+
+    print(f"Task added successfully (ID: {task_id})")
+
+
 
 def main():
     """
