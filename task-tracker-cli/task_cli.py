@@ -110,7 +110,7 @@ def list_tasks(status=None):
             f"{task['status']} | "
             f"{created_date}"
         )
-        
+
 
 def main():
     """
@@ -138,6 +138,18 @@ def main():
         
         description = args[2]
         add_task(description)
+
+    elif command == "list":
+        # Optional status argument
+        status = args[2] if len(args) > 2 else None
+
+        valid_statuses = ["todo", "in-progess", "done"]
+
+        if status and status not in valid_statuses:
+            print("Error: Invalid status. Use todo, in-progress, or done.")
+            return
+        
+        list_tasks(status)
     else:
         print("Error: Unknown command")
 
