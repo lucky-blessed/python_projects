@@ -81,6 +81,36 @@ def add_task(description):
     print(f"Task added successfully (ID: {task_id})")
 
 
+def list_tasks(status=None):
+    """
+    List tasks.
+    If status is provided, filter tasks by that status.
+    """
+    tasks = load_tasks()
+
+    # If there are no tasks at all
+    if not tasks:
+        print("No tasks found.")
+        return
+    
+    # Filter tasks if a status is specified
+    if status:
+        tasks = [task for task in tasks if task["status"] == status]
+
+        if not tasks:
+            print(f"No tasks with status '{status}'.")
+            return
+    
+    # Display tasks
+    for task in tasks:
+        created_date = task["createdAt"].split("T")[0]
+        print(
+            f"[{task['id']}] "
+            f"{task['description']} | "
+            f"{task['status']} | "
+            f"{created_date}"
+        )
+        
 
 def main():
     """
