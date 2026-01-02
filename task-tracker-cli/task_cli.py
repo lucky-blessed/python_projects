@@ -100,8 +100,16 @@ def main():
         return
     
     command = args[1]
-    print(f"Command recieved: {command}")
 
+    if command == "add":
+        if len(args) < 3:
+            print("Error: Task description required")
+            return
+        
+        description = args[2]
+        add_task(description)
+    else:
+        print("Error: Unknown command")
 
 
 if __name__ == "__main__":

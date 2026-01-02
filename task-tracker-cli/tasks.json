@@ -1,1 +1,9 @@
-[]
+[
+  {
+    "id": 1,
+    "description": "Buy Phone",
+    "status": "todo",
+    "createdAt": "2026-01-02T01:07:57.923404",
+    "updatedAt": "2026-01-02T01:07:57.923404"
+  }
+]
