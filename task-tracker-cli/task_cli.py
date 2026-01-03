@@ -112,6 +112,27 @@ def list_tasks(status=None):
         )
 
 
+def update_task(task_id, new_description):
+    """
+    Update the description of an existing task.
+    """
+
+    tasks = load_tasks()
+
+    # Search for the task by  ID
+    for task in tasks:
+        if task["id"] ==  task_id:
+            task["description"] = new_description
+            task["updatedAt"] = datetime.now().isoformat()
+
+            save_tasks(tasks)
+            print(f"Task {task_id} updated successfully.")
+            return
+        
+    # If loop finishes, task was not found
+    print(f"Error: Task with ID {task_id} not found.")
+
+
 def main():
     """
     Entry point of the Task Tracker CLI.
