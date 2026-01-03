@@ -171,6 +171,20 @@ def main():
             return
         
         list_tasks(status)
+
+    elif command == "update":
+        if len(args) < 4:
+            print("Error: Task ID and new description required")
+            return
+        
+        try:
+            task_id = int(args[2])
+        except ValueError:
+            print("Error: Task ID must be a number")
+            return
+        
+        new_description = args[3]
+        update_task(task_id, new_description)
     else:
         print("Error: Unknown command")
 
