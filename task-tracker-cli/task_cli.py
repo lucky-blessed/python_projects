@@ -205,6 +205,19 @@ def main():
         
         new_description = args[3]
         update_task(task_id, new_description)
+
+    elif command == "delete":
+        if len(args) < 3:
+            print("Error: Task ID required.")
+            return
+        
+        try:
+            task_id = int(args[2])
+        except ValueError:
+            print("Error: Task ID must be a number")
+            return
+        
+        delete_task(task_id)
     else:
         print("Error: Unknown command")
 
