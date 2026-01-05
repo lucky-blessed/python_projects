@@ -133,6 +133,26 @@ def update_task(task_id, new_description):
     print(f"Error: Task with ID {task_id} not found.")
 
 
+
+def delete_task(task_id):
+    """
+    Deletes a task by using the task ID.
+    """
+
+    tasks = load_tasks()
+
+    # Create a new list excluding the task to delete
+    updated_tasks = [task for task in tasks if task["id"] != task_id]
+
+    # If no task was removed, the ID was not found
+    if len(updated_tasks) == len(tasks):
+        print(f"Error: Task with ID {task_id} not found.")
+        return
+    
+    save_tasks(updated_tasks)
+    print(f"Task {task_id} deleted successfully.")
+
+
 def main():
     """
     Entry point of the Task Tracker CLI.
