@@ -152,6 +152,7 @@ def delete_task(task_id):
     save_tasks(updated_tasks)
     print(f"Task {task_id} deleted successfully.")
 
+
 def mark_task_status(task_id, new_status):
     """
     Updates task status.
@@ -166,6 +167,38 @@ def mark_task_status(task_id, new_status):
 
             save_tasks(tasks)
             print(f"Task {task_id} marked as {new_status}.")
+            return
+        
+    # if task not found
+    print(f"Error: Task with ID {task_id} not found.")
+
+
+def show_help():
+    """
+    Displays help information for the Task tracker CLI.
+    """
+    print("\nTask Tracker CLI - Available Commands\n")
+
+    print('add "description"')
+    print("     Add a new task\n")
+
+    print('update <id> "description"')
+    print("    Update an existing task\n")
+
+    print("delete <id>")
+    print("     Delete a task\n")
+
+    print("mark-in-progress <id>")
+    print("    Mark a task as in progress\n")
+
+    print("mark-done <id>")
+    print("     Mark a task as done\n")
+
+    print("list [todo | in-progress | done]")
+    print("    List tasks (optionally filtered by status)\n")
+
+    print("help")
+    print("    Shows this help message\n")
 
 
 def main():
@@ -181,13 +214,16 @@ def main():
 
     # If no command is provided
     if len(args) < 2:
-        print("Error: No command provided.")
-        print("Usage: python task-cli.py <command> [arguments]")
+        show_help()
         return
     
     command = args[1]
 
-    if command == "add":
+    if command == "help":
+        show_help()
+        return
+
+    elif command == "add":
         if len(args) < 3:
             print("Error: Task description required")
             return
@@ -199,7 +235,7 @@ def main():
         # Optional status argument
         status = args[2] if len(args) > 2 else None
 
-        valid_statuses = ["todo", "in-progess", "done"]
+        valid_statuses = ["todo", "in-progress", "done"]
 
         if status and status not in valid_statuses:
             print("Error: Invalid status. Use todo, in-progress, or done.")
@@ -260,14 +296,9 @@ def main():
         
         mark_task_status(task_id, "done")
     else:
-        print(f"Error: Unknown command '{command}'")
-        print("Available commands:")
-        print("   add \"description\"")
-        print("   update <id> \"description\"")
-        print("   mark-in-progress <id>")
-        print("   mark-done <id>")
-        print("   list [todo | in-progress | done]")
-
+        print(f"Error: Unknown command '{command}'\n")
+        show_help()
+        
 
 if __name__ == "__main__":
     main()
