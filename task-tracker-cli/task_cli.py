@@ -197,7 +197,11 @@ def main():
     
     command = args[1]
 
-    if command == "add":
+    if command == "help":
+        show_help()
+        return
+
+    elif command == "add":
         if len(args) < 3:
             print("Error: Task description required")
             return
