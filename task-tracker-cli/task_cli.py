@@ -192,8 +192,7 @@ def main():
 
     # If no command is provided
     if len(args) < 2:
-        print("Error: No command provided.")
-        print("Usage: python task-cli.py <command> [arguments]")
+        show_help()
         return
     
     command = args[1]
