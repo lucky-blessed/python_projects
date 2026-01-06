@@ -83,7 +83,7 @@ If you are a recruiter, instructor, or fellow developer, feel free to explore th
 
 ## 👤 Author
 
-**Lucky Blessed**  
+**Lucky Nkwor**  
 Software Engineering Student | Python Developer  
 
 🔗 GitHub: https://github.com/lucky-blessed
