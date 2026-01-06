@@ -152,6 +152,21 @@ def delete_task(task_id):
     save_tasks(updated_tasks)
     print(f"Task {task_id} deleted successfully.")
 
+def mark_task_status(task_id, new_status):
+    """
+    Updates task status.
+    """
+
+    tasks = load_tasks()
+
+    for task in tasks:
+        if task["id"] == task_id:
+            task["status"] = new_status
+            task["updatedAt"] = datetime.now().isoformat()
+
+            save_tasks(tasks)
+            print(f"Task {task_id} marked as {new_status}.")
+
 
 def main():
     """
