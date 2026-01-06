@@ -248,7 +248,8 @@ def main():
         
         delete_task(task_id)
     else:
-        print("Error: Unknown command")
+        print(f"Error: Unknown command '{command}'\n")
+        show_help()
 
 
 if __name__ == "__main__":
