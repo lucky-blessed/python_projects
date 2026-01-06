@@ -233,8 +233,40 @@ def main():
             return
         
         delete_task(task_id)
+
+    elif command == "mark-in-progress":
+        if len(args) < 3:
+            print("Error: Task ID required.")
+            return
+        
+        try:
+            task_id = int(args[2])
+        except ValueError:
+            print("Error: Task ID must be a number")
+            return
+        
+        mark_task_status(task_id, "in-progress")
+
+    elif command == "mark-done":
+        if len(args) < 3:
+            print("Error: Task ID required.")
+            return
+        
+        try:
+            task_id = int(args[2])
+        except ValueError:
+            print("Error: Task ID must be a number.")
+            return
+        
+        mark_task_status(task_id, "done")
     else:
-        print("Error: Unknown command")
+        print(f"Error: Unknown command '{command}'")
+        print("Available commands:")
+        print("   add \"description\"")
+        print("   update <id> \"description\"")
+        print("   mark-in-progress <id>")
+        print("   mark-done <id>")
+        print("   list [todo | in-progress | done]")
 
 
 if __name__ == "__main__":
