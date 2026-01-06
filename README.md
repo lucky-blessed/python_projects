@@ -1,6 +1,6 @@
 # 🐍 Python Projects Portfolio
 
-Welcome to my **Python Projects** repository — a growing collection of practical Python applications built to demonstrate problem-solving skills, clean code practices, and real-world software development concepts.
+Welcome to my **Python Projects** repository, a growing collection of practical Python applications built to demonstrate problem solving skills, clean code practices, and real world software development concepts.
 
 This repository serves as a **portfolio for recruiters, instructors, and collaborators**, showcasing my journey and proficiency with Python.
 
@@ -21,7 +21,7 @@ This repository serves as a **portfolio for recruiters, instructors, and collabo
 ## 🚀 Projects Included
 
 ### 1. Task Tracker CLI (Python)
-A command-line task management application rebuilt in **Python**.
+A command line task management application rebuilt in **Python**.
 
 **Features:**
 - Add, update, delete tasks
@@ -41,7 +41,7 @@ A command-line task management application rebuilt in **Python**.
 ## 🛠️ Technologies & Concepts Used
 
 - **Python 3**
-- Command-Line Interface (CLI)
+- Command Line Interface (CLI)
 - File I/O (JSON persistence)
 - Modular programming
 - Error handling
@@ -56,14 +56,14 @@ Those projects are **not yet added to this repository**, but they will be migrat
 
 This repository reflects:
 - Continuous learning
-- Re-implementation of ideas across languages
+- Reimplementation of ideas across languages
 - Growth from guided learning to independent project design
 
 ---
 
 ## 📈 Future Plans
 
-- Add more Python projects (utilities, automation scripts, mini-apps)
+- Add more Python projects (utilities, automation scripts, mini apps)
 - Migrate and polish past ALX Python projects
 - Improve documentation and test coverage
 - Explore advanced topics such as:
