@@ -152,6 +152,32 @@ def delete_task(task_id):
     save_tasks(updated_tasks)
     print(f"Task {task_id} deleted successfully.")
 
+def show_help():
+    """
+    Displays help information for the Task tracker CLI.
+    """
+    print("\nTask Tracker CLI - Available Commands\n")
+
+    print('add "description"')
+    print("     Add a new task\n")
+
+    print('update <id> "description"')
+    print("    Update an existing task\n")
+
+    print("delete <id>")
+    print("     Delete a task\n")
+
+    print("mark-in-progress <id>")
+    print("    Mark a task as in progress\n")
+
+    print("mark-done <id>")
+    print("     Mark a task as done\n")
+
+    print("list [todo | in-progress | done]")
+    print("    List tasks (optionally filtered by status)\n")
+
+    print("help")
+    print("    Shows this help message\n")
 
 def main():
     """
