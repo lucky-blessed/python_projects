@@ -1,0 +1,21 @@
+# Python bytecode — compiled files Python generates automatically, not needed in git
+__pycache__/
+*.py[cod]
+
+# Virtual environment — my local dependencies, never committed
+.venv/
+venv/
+env/
+
+# Build artifacts — generated when packaging, not source code
+dist/
+build/
+*.egg-info/
+
+# Editor files — personal editor settings, not project code
+.vscode/
+.idea/
+
+# OS files
+.DS_Store        # macOS
+Thumbs.db        # Windows
