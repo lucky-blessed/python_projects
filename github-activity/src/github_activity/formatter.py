@@ -83,9 +83,9 @@ def format_event(event: dict) -> str:
 
 
     if event_type == "PushEvent":
-        count = payload.get("size", 0)
-        noun = "commit" if count == 1 else "commits"
-        message = f"Pushed {count} {noun} to {repo_name}"
+        # PushEvents are handled and grouped in format_events()
+        # This is a fallback in case format_event is called directly
+        message = f"Pushed to {repo_name}"
 
     elif event_type == "IssuesEvent":
         action = payload.get("action", "interacted with")
@@ -125,26 +125,45 @@ def format_event(event: dict) -> str:
         message = f"{action.capitalize()} {member} as collaborator in {repo_name}" 
 
     else:
-        message = f"{label} in {repo_name}"
+        message = f"- {label} in {repo_name}"
 
     # Append relative time if available
     if time_ago:
         return f"{message} [{time_ago}]"
-    return message
+    return f"- {message}"
 
 
 def format_events(events: list[dict]) -> list[str]:
     """
     Format a list of GitHub events into human readable strings.
 
+    PushEvents are grouped by repo and counted separetely, then prepended to the
+    results list. All other events are formatted individually in the order they appear.
+
     Argds:
         events: List of event dicts from the GitHub API.
 
     Returns:
-        A list of formatted strings, one per event.
+        A list of formatted strings, one per event (pushes grouped by repo).
     """
 
     if not events:
         return ["No recent public activity found."]
-    
-    return [format_event(event) for event in events]
+
+    push_counts = {}  # { repo_name: count }
+    results = []
+
+    for event in events:
+        if event.get("type") == "PushEvent":
+            repo_name = event.get("repo", {}).get("name", "unknown/repo")
+            # If we've seen this repo before, increament. Otherwise start at 1.
+            push_counts[repo_name] = push_counts.get(repo_name, 0) + 1
+        else:
+            results.append(format_event(event))
+
+    # Prepend push summaries to the top of the results
+    for repo_name, count in push_counts.items():
+        noun = "time" if count == 1 else "times"
+        results.insert(0, f"- Pushed {count} {noun} to {repo_name}")
+
+    return results
