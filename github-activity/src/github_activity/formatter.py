@@ -41,7 +41,7 @@ def format_time_ago(iso_timestamp: str) -> str:
     seconds = int(delta.total_seconds())
 
     if seconds < 60:
-        return f"{seconds} seconds{'s' if seconds != 1 else ''} ago"
+        return f"{seconds} second{'s' if seconds != 1 else ''} ago"
     
     minutes = seconds // 60
     if minutes < 60:
@@ -125,11 +125,11 @@ def format_event(event: dict) -> str:
         message = f"{action.capitalize()} {member} as collaborator in {repo_name}" 
 
     else:
-        message = f"- {label} in {repo_name}"
+        message = f"{label} in {repo_name}"
 
     # Append relative time if available
     if time_ago:
-        return f"{message} [{time_ago}]"
+        return f"- {message} [{time_ago}]"
     return f"- {message}"
 
 
@@ -140,7 +140,7 @@ def format_events(events: list[dict]) -> list[str]:
     PushEvents are grouped by repo and counted separetely, then prepended to the
     results list. All other events are formatted individually in the order they appear.
 
-    Argds:
+    Args:
         events: List of event dicts from the GitHub API.
 
     Returns:
