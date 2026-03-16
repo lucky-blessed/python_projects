@@ -16,3 +16,8 @@ github-activity = "github_activity.cli:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/github_activity"]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+]
