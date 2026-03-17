@@ -107,4 +107,103 @@ class TestFormatEvent:
         assert "branch" in result
         assert "feature/new-thing" in result
 
-    
+    def test_pull_request_event(self):
+        event = self.make_event("PullRequestEvent", {
+            "action": "opened",
+            "pull_request": {"title": "Fix bug in api"}
+        })
+        result = format_event(event)
+        assert "Opened" in result
+        assert "Fix bug in api" in result
+
+    def test_unknown_event(self):
+        event = self.make_event("SomeNewEventType")
+        result = format_event(event)
+        assert "testuser/testrepo" in result
+
+    def test_output_starts_with_dash(self):
+        event = self.make_event("WatchEvent")
+        result = format_event(event)
+        assert result.startswith("- ")
+
+    def test_timestamp_included(self):
+        event = self.make_event("WatchEvent")
+        result = format_event(event)
+        assert "ago" in result
+
+
+class TestFormatEvents:
+    """Tests for format_events functions"""
+
+    def test_empty_events(self):
+        result =  format_events([])
+        assert result == ["No recent public activity found."]
+
+    def test_push_events_grouped(self):
+        events = [
+            {
+                "type": "PushEvent",
+                "repo": {"name": "testuser/repo-a"},
+                "payload": {},
+                "created_at": make_timestamp(100),
+            },
+            {
+                
+                "type": "PushEvent",
+                "repo": {"name": "testuser/repo-a"},
+                "payload": {},
+                "created_at": make_timestamp(200),
+            },
+            {
+                
+                "type": "PushEvent",
+                "repo": {"name": "testuser/repo-b"},
+                "payload": {},
+                "created_at": make_timestamp(300),
+            },
+        ]
+        result = format_events(events)
+
+        # Find push lines
+        push_lines = [line for line in result if "Pushed" in line]
+        assert len(push_lines) == 2 # repos, not 3 events
+
+        repo_a_line = next(l for l in push_lines if "repo-a" in l)
+        assert "2 times" in repo_a_line
+
+        repo_b_line = next(l for l in push_lines if "repo-b" in l)
+        assert "1 time" in repo_b_line
+
+    def test_non_push_events_preserved(self):
+        events = [
+            {
+                "type": "WatchEvent",
+                "repo": {"name": "testuser/some-repo"},
+                "payload": {},
+                "created_at": make_timestamp(100),
+            }
+        ]
+        result = format_events(events)
+        assert  any("Starred" in line for line in result)
+
+
+    def test_push_lines_prepended(self):
+        events = [
+            {
+                "type": "WatchEvent",
+                "repo": {"name": "testuser/repo"},
+                "payload": {},
+                "created_at": make_timestamp(100)
+            },
+            {
+                "type": "PushEvent",
+                "repo": {"name": "testuser/repo"},
+                "payload": {},
+                "created_at": make_timestamp(200)
+            },
+        ]
+        result = format_events(events)
+        # Push summary should appear before the Starred line
+        push_index = next(i for i, l in enumerate(result) if "Pushed" in l)
+        watch_index = next(i for i, l in enumerate(result) if "Starred" in l)
+        assert push_index < watch_index
