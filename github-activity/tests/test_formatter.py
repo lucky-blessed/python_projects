@@ -85,3 +85,26 @@ class TestFormatEvent:
         result = format_event(event)
         assert "Forked" in result
         assert "testuser/testrepo" in result
+
+    def test_issues_event_opened(self):
+        event = self.make_event("IssuesEvent", {"action": "opened"})
+        result = format_event(event)
+        assert "Opened" in result
+        assert "issue" in result
+
+    def test_issues_event_closed(self):
+        event = self.make_event("IssuesEvent", {"action": "closed"})
+        result = format_event(event)
+        assert "Closed" in result
+
+    def test_create_event_branch(self):
+        event = self.make_event("CreateEvent", {
+            "ref_type": "branch",
+            "ref": "feature/new-thing"
+        })
+        result = format_event(event)
+        assert "Created" in result
+        assert "branch" in result
+        assert "feature/new-thing" in result
+
+    
