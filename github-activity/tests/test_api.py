@@ -64,7 +64,7 @@ class TestFetchUserActivity:
 
         with patch("urllib.request.urlopen", side_effect=http_error):
             with pytest.raises(SystemExit) as exc_info:
-                fetch_user_activity("nonexistentuser")
+                fetch_user_activity("nonexistentuser999")
             assert exc_info.value.code == 1
 
     def test_403_exits_with_error(self):
