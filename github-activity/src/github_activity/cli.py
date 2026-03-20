@@ -1,3 +1,4 @@
+from __future__ import annotations
 import sys
 import argparse
 from github_activity.api import fetch_user_activity

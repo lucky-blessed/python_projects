@@ -1,3 +1,4 @@
+from __future__ import annotations
 import urllib.request  # to make http request
 import urllib.error
 import json             # to parse JSON text into python dictionaries and list

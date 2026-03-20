@@ -1,3 +1,4 @@
+from __future__ import annotations
 import pytest
 from unittest.mock import patch
 from github_activity.cli import main, build_parser

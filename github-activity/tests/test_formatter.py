@@ -1,3 +1,4 @@
+from __future__ import annotations
 from github_activity.formatter import format_time_ago, format_event, format_events
 from datetime import datetime, timezone, timedelta
 
