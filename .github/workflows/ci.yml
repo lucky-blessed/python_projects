@@ -12,8 +12,9 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
+      fail-fast: false
       matrix:
-        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+        python-version: ["3.8", "3.9", "3.10", "3.11", 3.12"]
 
     steps:
       - name: Checkout code
@@ -22,13 +23,15 @@ jobs:
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python-version }}  
+          python-version: ${{ matrix.python-version }}
 
       - name: Install dependencies
+        working-directory: github-activity
         run: |
           python -m pip install --upgrade pip
           pip install -e ".[dev]"
 
       - name: Run tests
+        working-directory: github-activity
         run: |
           pytest tests/ -v
